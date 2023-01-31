@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" >
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Frontend Mentor | Todo app</title>
+</head>
+  <body>
+  <header>
+    <div class="bg_img"></div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <section class="hero-container">
+        <h1>todo</h1>
+        <button class="theme-toggle-button">
+          <div class="moon-toggle"></div>
+          <div class="sun-toggle"></div>
+        </button>
+      </section>
+
+      <div class="list-container">
+        <form>
+          <input type="text" placeholder="Create a new todo...">
+          <div class="gradient-div">
+            <svg class="check" xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+              <path fill="none" stroke="#FFF" stroke-width="2" d="M1 4.304L3.696 7l6-6"/>
+            </svg>
+          </div>
+        </form>
+
+        <div class="todo-container">
+          <ul class="todo-form draggable-list" id="draggable-list">
+            <!-- see JavaScript -->
+          </ul>
+
+          <div class="choice-container">
+            <p><span class="nbr-items">5</span><span class="oneItem"> item left</span></p>
+            <ul class="select-container">
+              <li id="all" class="active">All</li>
+              <li id="active">Active</li>
+              <li id="completed">Completed</li>
+            </ul>
+            <div class="clear-completed">Clear Completed</div>
+          </div>
+        </div>
+
+        <p class="drag">Drag and drop to reorder list</p>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

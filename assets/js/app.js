@@ -31,17 +31,18 @@ const itemsWhithOrWithoutS = document.querySelector('.oneItem')
 // initialise le nombre d'item à zéro
 nbr_items.innerHTML = 0
 
+// add todo to the todo list
 form.addEventListener('submit', e => {
     e.preventDefault();
         displayTodo()
 })
 
+//display todo in local storage
 displayLS.forEach((data, index) => {
     displayTodo(data, index)
-    // clearCompleted(data)
 });
 
-// diplay all tasks
+// display all tasks
 function displayTodo(data, index) {
     const todo = input.value
 
@@ -91,12 +92,16 @@ function displayTodo(data, index) {
         numberOfItems(1)
 
         li.addEventListener('change', e => {
-            data.done = e.target.checked
-            localStorage.setItem('todos', JSON.stringify(displayLS))
-            if (data.done) {
-                li.classList.add('done')
+            if (data !== undefined) {
+                data.done = e.target.checked
+                localStorage.setItem('todos', JSON.stringify(displayLS))
+                if (data.done) {
+                    li.classList.add('done')
+                } else {
+                    li.classList.remove('done')
+                }
             } else {
-                li.classList.remove('done')
+                location.reload()
             }
         })
 
@@ -106,10 +111,11 @@ function displayTodo(data, index) {
             }
         }
 
+        // delete todo by clicking on the cross
         img.addEventListener('click', () => {
-            const text = para.innerHTML
-            let newLS = displayLS.filter(t => t.task !== text)
-            localStorage.setItem('todos', JSON.stringify(newLS))
+            const id = li.dataset.index
+            displayLS.splice(id, 1)
+            localStorage.setItem('todos', JSON.stringify(displayLS));
             location.reload()
         })
 
@@ -120,7 +126,6 @@ function displayTodo(data, index) {
 // save into localStorage
 function saveLS(todo) {
     if (todo !== '') {
-        // let todosLS = getLS()
         displayLS.push({
             task: todo,
             done: false
@@ -191,3 +196,4 @@ function filterTodoItems(id) {
             break;
     }
 }
+

@@ -33,14 +33,14 @@ nbr_items.innerHTML = 0
 
 // add todo to the todo list
 form.addEventListener('submit', e => {
-    e.preventDefault();
+    e.preventDefault()
         displayTodo()
 })
 
 //display todo in local storage
 displayLS.forEach((data, index) => {
     displayTodo(data, index)
-});
+})
 
 // display all tasks
 function displayTodo(data, index) {
@@ -51,13 +51,13 @@ function displayTodo(data, index) {
     }
 
     if (data || todo) {
-        const li = document.createElement('li');
+        const li = document.createElement('li')
         li.setAttribute('data-index', index)
-        document.querySelector('.todo-form').appendChild(li);
+        document.querySelector('.todo-form').appendChild(li)
 
         const div = document.createElement('div')
-        div.classList.add('draggable')
-        div.setAttribute('draggable', true)
+        li.classList.add('draggable')
+        li.setAttribute('draggable', true)
         li.appendChild(div)
 
         const para =  document.createElement('p')
@@ -115,7 +115,7 @@ function displayTodo(data, index) {
         img.addEventListener('click', () => {
             const id = li.dataset.index
             displayLS.splice(id, 1)
-            localStorage.setItem('todos', JSON.stringify(displayLS));
+            localStorage.setItem('todos', JSON.stringify(displayLS))
             location.reload()
         })
 
@@ -163,7 +163,7 @@ selected.forEach(element => {
         element.classList.add('active')
         filterTodoItems(e.target.id)
     })
-});
+})
 
 // filter to diplay all tasks, active tasks or completed tasks
 function filterTodoItems(id) {
@@ -176,8 +176,8 @@ function filterTodoItems(id) {
                 } else {
                     element.classList.remove('hidden')
                 }
-            });
-            break;
+            })
+            break
 
         case 'active':
             AllItems.forEach(element => {
@@ -186,14 +186,68 @@ function filterTodoItems(id) {
                 } else {
                     element.classList.remove('hidden')
                 }
-            });
-            break;
+            })
+            break
 
         default:
             AllItems.forEach(element => {
                 element.classList.remove('hidden')
-            });
-            break;
+            })
+            break
     }
 }
 
+// drag and drop functions start
+function handleDragStart(e) {
+    dragSrcEl = this
+
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/html', dragSrcEl.innerHTML)
+}
+
+function handleDragEnter() {
+    this.classList.add('over')
+}
+
+function handleDragLeave() {
+    this.classList.remove('over')
+}
+
+function handleDragEnd() {
+    items.forEach(item => {
+        item.classList.remove('over')
+    })
+}
+
+function handleDragOver(e) {
+    e.preventDefault()
+    return false
+}
+
+function handleDrop(e) {
+    e.stopPropagation() // stops the browser from redirecting
+    if (dragSrcEl !== this) {
+        const indexStart = dragSrcEl.querySelector('div p').innerHTML
+        const indexEnd = this.querySelector('div p').innerHTML
+
+        const srcIndex = displayLS.findIndex(task => task.task === indexStart)
+        const destIndex = displayLS.findIndex(task => task.task === indexEnd)
+
+        console.log([displayLS[srcIndex], displayLS[destIndex]] = [displayLS[destIndex], displayLS[srcIndex]])
+
+        localStorage.setItem('todos', JSON.stringify(displayLS))
+        location.reload()
+    }
+    return false;
+}
+
+let items = document.querySelectorAll('.draggable-list .draggable')
+items.forEach(item => {
+    item.addEventListener('dragstart', handleDragStart)
+    item.addEventListener('dragover', handleDragOver)
+    item.addEventListener('dragenter', handleDragEnter)
+    item.addEventListener('dragleave', handleDragLeave)
+    item.addEventListener('dragend', handleDragEnd)
+    item.addEventListener('drop', handleDrop)
+})
+// drag and drop functions end

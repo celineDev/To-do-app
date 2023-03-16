@@ -1,5 +1,3 @@
-@import "./_dark.css";
-
 :root {
     --brightBlue: hsl(220, 98%, 61%);
     --checkBackground: linear-gradient(to bottom, hsl(192, 100%, 67%) 0%, hsl(280, 87%, 65%) 100%);
@@ -283,7 +281,7 @@ ul li.checked .cross {
     text-align: center;
     font-size: 14px;
     color: var(--darkGrayishBlue);
-    margin-top: 54px;
+    padding: 54px;
 }
 
 /* ########## QUERIES ########## */
@@ -400,5 +398,107 @@ ul li.checked .cross {
         left: 52%;
         width: 49%;
         height: 49%;
+    }
+}
+
+
+/* dark mode */
+:root {
+    --veryDarkBlue: hsl(235, 21%, 11%);
+    --veryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+    --lightGrayishBlue: hsl(234, 39%, 85%);
+    --lightGrayishBlueHover: hsl(236, 33%, 92%);
+    --darkGrayishBlue: hsl(234, 11%, 52%);
+    --veryDarkGrayishBlue: hsl(233, 14%, 35%);
+    --veryDarkGrayishBlueTooth: hsl(237, 14%, 26%);
+}
+
+.dark {
+    background-color: hsl(235, 21%, 12%);
+}
+
+.dark .bg_img {
+    background-image: url(../images/bg-desktop-dark.jpg);
+}
+
+.dark .moon-toggle {
+    background-image: url(../images/icon-sun.svg);
+}
+
+.dark .check {
+    border: 1px solid var(--veryDarkGrayishBlue);
+}
+
+.dark .check > path {
+    stroke: var(--veryDarkDesaturatedBlue);
+}
+
+.dark .check.checked path {
+    stroke: var(--veryLightGray);
+}
+
+.dark input[type=text],
+.dark ul > li {
+    background-color: var(--veryDarkDesaturatedBlue);
+    color: var(--lightGrayishBlue);
+}
+
+.dark ul li {
+    border-bottom: 1px solid var(--veryDarkGrayishBlue);
+}
+
+.dark .checkbox:checked,
+.dark ul li.done {
+    color: var(--veryDarkGrayishBlue);
+    text-decoration-color: var(--veryDarkGrayishBlue);
+}
+
+.dark .choice-container {
+    background-color: var(--veryDarkDesaturatedBlue);
+    color: var(--veryDarkGrayishBlue);
+}
+
+.dark .clear-completed:hover,
+.dark .select-container li:hover {
+    color: var(--lightGrayishBlueHover);
+}
+
+.dark .select-container li {
+    border-bottom: none;
+    color: var(--veryDarkGrayishBlue);
+}
+
+.dark .select-container .active {
+    color: var(--brightBlue);
+}
+
+.dark .todo-container {
+    box-shadow: none;
+}
+
+.dark .drag {
+    color: var(--veryDarkGrayishBlue);
+}
+
+.dark input[type="checkbox"] {
+    background: var(--veryDarkDesaturatedBlue);
+    border: 1px solid var(--veryDarkGrayishBlue);
+}
+
+.dark input[type="checkbox"]:hover {
+    border: 1.3px solid hsl(280, 87%, 65%, .8);
+}
+
+.dark .checkbox:checked{
+    background: var(--checkBackground);
+}
+
+@media screen and (max-width: 375px) {
+    .dark .bg_img {
+        background-image: url(../images/bg-mobile-dark.jpg);
+    }
+
+    .dark .select-container {
+        background-color: var(--veryDarkDesaturatedBlue);
     }
 }

@@ -101,11 +101,6 @@ input[type="checkbox"] {
     border: none;
 }
 
-/* .checkbox:checked, .done{
-    background: var(--checkBackground);
-    border: none;
-} */
-
 input:checked:hover {
     border: 1px solid var(--checkBackground);
 }
